@@ -20,27 +20,28 @@ void print_node(node *);
 void free_node(node *);
 
 int main() {
-  /* node *root = build_tree(); */
+  node *root = build_tree();
 
   /* depth_first_pre(root, print_node); */
-  /* depth_first_post(root, free_node); */
+  depth_first_post(root, free_node);
 
-  q_node *head = create_qnode(1);
-  enqueue(head, create_qnode(2));
-  enqueue(head, create_qnode(3));
+  /* q_node *head = create_qnode(1); */
+  /* enqueue(head, create_qnode(2)); */
+  /* enqueue(head, create_qnode(3)); */
 
-  q_node *q_node_ptr, *q_node_ptr2;
+  /* q_node *q_node_ptr; */
 
-  printf("%p\n", (void *)head);
-  q_node_ptr = dequeue(head);
-  printf("%d\n", q_node_ptr->value);
-  free(q_node_ptr);
+  /* q_node_ptr = dequeue(&head); */
+  /* printf("%d\n", q_node_ptr->value); */
+  /* free(q_node_ptr); */
 
-  printf("%p\n", (void *)head);
-  printf("%d\n", head->value);
-/*   q_node_ptr2 = dequeue(head); */
-/*   printf("%d\n", q_node_ptr2->value); */
-/*   free(q_node_ptr2); */
+  /* q_node_ptr = dequeue(&head); */
+  /* printf("%d\n", q_node_ptr->value); */
+  /* free(q_node_ptr); */
+
+  /* q_node_ptr = dequeue(&head); */
+  /* printf("%d\n", q_node_ptr->value); */
+  /* free(q_node_ptr); */
 
   return 0;
 }
