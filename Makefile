@@ -1,6 +1,6 @@
 CFLAGS=-Wall -g
 
-all:
+all: clean
 	make tree
 
 clean:

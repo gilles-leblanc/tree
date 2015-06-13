@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "queue.c"
 
 struct tree_node {
   int value;
@@ -12,17 +13,35 @@ typedef void (*node_func)(node *);
 
 node * create_node(int, node *);
 node * build_tree();
+void breadth_first(node *, node_func);
 void depth_first_pre(node *, node_func);
 void depth_first_post(node *, node_func);
 void print_node(node *);
 void free_node(node *);
 
 int main() {
-  node *root = build_tree();
+  /* node *root = build_tree(); */
 
-  depth_first_pre(root, print_node);
+  /* depth_first_pre(root, print_node); */
+  /* depth_first_post(root, free_node); */
 
-  depth_first_post(root, free_node);
+  q_node *head = create_qnode(1);
+  enqueue(head, create_qnode(2));
+  enqueue(head, create_qnode(3));
+
+  q_node *q_node_ptr, *q_node_ptr2;
+
+  printf("%p\n", (void *)head);
+  q_node_ptr = dequeue(head);
+  printf("%d\n", q_node_ptr->value);
+  free(q_node_ptr);
+
+  printf("%p\n", (void *)head);
+  printf("%d\n", head->value);
+/*   q_node_ptr2 = dequeue(head); */
+/*   printf("%d\n", q_node_ptr2->value); */
+/*   free(q_node_ptr2); */
+
   return 0;
 }
 
@@ -60,6 +79,12 @@ void depth_first_pre(node *current, node_func func) {
 
   depth_first_pre(current->left, func);
   depth_first_pre(current->right, func);
+}
+
+/* function that walks tree and takes function pointer */
+/* breadth-first traversal */
+void breadth_first(node *current, node_func func) {
+
 }
 
 /* function that walks tree and takes function pointer */
