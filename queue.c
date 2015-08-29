@@ -1,17 +1,17 @@
 #include <stdlib.h>
 
 struct queue_node {
-  int value;
+  void * value;
   struct queue_node *next;
 };
 
 typedef struct queue_node q_node;
 
-q_node * create_qnode(int);
+q_node * create_qnode(void *);
 void enqueue(q_node *, q_node *);
 q_node * dequeue(q_node **);
 
-q_node * create_qnode(int value) {
+q_node * create_qnode(void * value) {
   q_node *new = malloc(sizeof(q_node));
   new->value = value;
 
