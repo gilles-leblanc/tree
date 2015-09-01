@@ -14,6 +14,7 @@ typedef void (*node_func)(node *);
 node * create_node(int, node *);
 node * build_tree();
 void breadth_first(node *);
+void create_or_enqueue(q_node **, node *);
 void depth_first_pre(node *, node_func);
 void depth_first_post(node *, node_func);
 void print_node(node *);
@@ -78,24 +79,24 @@ void breadth_first(node *current) {
     q_node *q_node_ptr = dequeue(&head);
     node *node_ptr = q_node_ptr->value;
     printf("%d, ", node_ptr->value);
+    q_node **head_ptr = &head;
 
     if (node_ptr->left != NULL) {
-      if (head == NULL) {
-        head = create_qnode(node_ptr->left);
-      }
-      else {
-        enqueue(head, create_qnode(node_ptr->left));
-      }
+      create_or_enqueue(head_ptr, node_ptr->left);
     }
 
     if (node_ptr->right != NULL) {
-      if (head == NULL) {
-        head = create_qnode(node_ptr->right);
-      }
-      else {
-        enqueue(head, create_qnode(node_ptr->right));
-      }
+      create_or_enqueue(head_ptr, node_ptr->right);
+    }
+  }
 }
+
+void create_or_enqueue(q_node **head, node *next_node) {
+  if (*head == NULL) {
+    *head = create_qnode(next_node);
+  }
+  else {
+    enqueue(*head, create_qnode(next_node));
   }
 }
 
