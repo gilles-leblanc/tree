@@ -67,6 +67,19 @@ void depth_first_pre(node *current, node_func func) {
 }
 
 /* function that walks tree and takes function pointer */
+/* Post-order Depth-first traversal */
+void depth_first_post(node *current, node_func func) {
+  if (current == NULL) {
+    return;
+  }
+
+  depth_first_post(current->left, func);
+  depth_first_post(current->right, func);
+
+  (func(current));
+}
+
+/* function that walks tree and takes function pointer */
 /* breadth-first traversal */
 void breadth_first(node *current) {
   if (current == NULL) {
@@ -98,19 +111,6 @@ void create_or_enqueue(q_node **head, node *next_node) {
   else {
     enqueue(*head, create_qnode(next_node));
   }
-}
-
-/* function that walks tree and takes function pointer */
-/* Post-order Depth-first traversal */
-void depth_first_post(node *current, node_func func) {
-  if (current == NULL) {
-    return;
-  }
-
-  depth_first_post(current->left, func);
-  depth_first_post(current->right, func);
-
-  (func(current));
 }
 
 void print_node(node *current) {
