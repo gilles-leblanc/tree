@@ -4,14 +4,13 @@
 
 struct tree_node {
   int value;
-  struct tree_node *parent;
   struct tree_node *left, *right;
 };
 
 typedef struct tree_node node;
 typedef void (*node_func)(node *);
 
-node * create_node(int, node *);
+node * create_node(int);
 node * build_tree();
 void breadth_first(node *);
 void create_or_enqueue(q_node **, node *);
@@ -23,32 +22,31 @@ void free_node(node *);
 int main() {
   node *root = build_tree();
 
-  // depth_first_pre(root, print_node);
-  breadth_first(root);
+  depth_first_pre(root, print_node);
+  // breadth_first(root);
   depth_first_post(root, free_node);
 
   return 0;
 }
 
-node * create_node(int value, node *parent) {
+node * create_node(int value) {
   node *new = malloc(sizeof(node));
   new->value = value;
-  new->parent = parent;
 
   return new;
 }
 
 /* builds a tree with a preset of data */
 node * build_tree() {
-  node *root = create_node(2, NULL);
-    root->left = create_node(7, root);
-      root->left->left = create_node(2, root->left);
-      root->left->right = create_node(6, root->left);
-        root->left->right->left = create_node(5, root->left->right);
-        root->left->right->right = create_node(11, root->left->right);
-    root->right = create_node(5, root);
-      root->right->right = create_node(9, root->right);
-        root->right->right->left = create_node(4, root->right->right);
+  node *root = create_node(2);
+    root->left = create_node(7);
+      root->left->left = create_node(2);
+      root->left->right = create_node(6);
+        root->left->right->left = create_node(5);
+        root->left->right->right = create_node(11);
+    root->right = create_node(5);
+      root->right->right = create_node(9);
+        root->right->right->left = create_node(4);
 
   return root;
 }
